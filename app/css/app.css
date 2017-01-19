@@ -1,0 +1,9 @@
+.view-height {
+  height: 100vh;
+  padding: 20px;
+}
+
+.inner-panel {
+  height: 100%;
+  padding: 10px;
+}
