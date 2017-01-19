@@ -1,0 +1,29 @@
+{
+  "name": "jsonviewer",
+  "description": "A simple page that easily view and edit JSON",
+  "main": "index.js",
+  "authors": [
+    "Waldemar Muhl"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "json",
+    "viewer",
+    "editor",
+    "html",
+    "angularjs"
+  ],
+  "homepage": "https://github.com/Wallyza/jsonviewer",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "angular": "angularjs#^1.6.1"
+  }
+}
