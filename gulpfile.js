@@ -8,6 +8,7 @@ gulp.task('inject', function () {
     gulp.src('./app/index.html')
     .pipe(inject(gulp.src(bowerFiles(), {read: false}), {name: 'bower'}))
     .pipe(inject(gulp.src('./app/css/*.css', {read: false})))
+    .pipe(inject(gulp.src('./app/app.js', {read: false})))
     .pipe(gulp.dest('./'));
 })
 
@@ -20,7 +21,7 @@ gulp.task('serve', ['inject'], function() {
         server: './'
     });
     gulp.watch('./app/index.html', ['build']);
-    gulp.watch(['./index.html', './app/css/*.css']).on('change', browserSync.reload);
+    gulp.watch(['./index.html', './app/css/*.css', './app/app.js']).on('change', browserSync.reload);
 });
 
 gulp.task('default', ['serve']);

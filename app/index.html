@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="jsonviewer">
   <head>
     <title>Simple JSON viewer and editor</title>
     <!-- bower:css -->
@@ -9,15 +9,58 @@
     <!-- built css files will go here... -->
     <!-- endinject -->
   </head>
-  <body>
+  <body ng-app="jsonviewer" ng-controller="MainController as vm">
     <div class="col-md-6 view-height">
-      LEFT PANE
+      <div class="inner-panel">
+        <ul>
+          <li ng-repeat="(key, value) in vm.objectBuffer">
+            <div ng-include src="vm.getTemplate(value)"></div>
+          </li>
+        </ul>
+      </div>
     </div>
     <div class="col-md-6 view-height">
-      <div class="inner-panel" contenteditable="true">
-        RIGHT PANE
-      </div>      
+      <textarea class="inner-panel" ng-model="vm.rightPanelContent" ng-change="vm.jsonChanged()">
+      </textarea>
     </div>
+
+    <script type="text/ng-template" id="default.html">
+      <strong>{{ key } :</strong> {{ value }}
+    </script>
+
+    <script type="text/ng-template" id="string.html">
+      <strong>{{ key }}:</strong> "{{ value }}"
+    </script>
+
+    <script type="text/ng-template" id="number.html">
+      <strong>{{ key }}:</strong> {{ value }}
+    </script>
+
+    <script type="text/ng-template" id="date.html">
+      <strong>{{ key }}:</strong> {{ value | date:'yyyy-MM-dd HH:mm:ss Z' }}
+    </script>
+
+    <script type="text/ng-template" id="null.html">
+      <strong>{{ key }}:</strong> null
+    </script>
+
+    <script type="text/ng-template" id="array.html">
+      <strong>{{ key }}:</strong> Array[{{value.length}}]
+      <ul>
+        <li ng-repeat="(key, value) in value">
+          <div ng-include src="vm.getTemplate(value)"></div>
+        </li>
+      </ul>
+    </script>
+
+    <script type="text/ng-template" id="object.html">
+      <strong>{{ key }}:</strong> Object
+      <ul>
+        <li ng-repeat="(key, value) in value">
+          <div ng-include src="vm.getTemplate(value)"></div>
+        </li>
+      </ul>
+    </script>
 
     <!-- bower:js -->
     <!-- bower installed scripts will go here... -->
